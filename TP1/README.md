@@ -372,11 +372,11 @@ Un peu austère aux premiers abords, une manipulation très basique permet d'avo
 
 - un `ping` entre vous et votre passerelle
 
-<img src="Image/image 0.png"/>
+<img src="image TP1/image 0.png"/>
 
 - un `netcat` entre vous et votre mate, branché en RJ45
 
-<img src="Image/e.png"/>
+<img src="Image TP1/e.png"/>
 
 - une requête DNS. Identifiez dans la capture le serveur DNS à qui vous posez la question.
 - prenez moi des screens des trames en question
