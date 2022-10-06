@@ -209,6 +209,31 @@ Le but est de configurer votre firewall plutôt que de le désactiver
   - vous utiliserez ce port pour communiquer avec `netcat` par groupe de 2 toujours
   - le firewall du *PC serveur* devra avoir un firewall activé et un `netcat` qui fonctionne
 
+Après réactivation et configuration du pare-feu de sorte à autoriser le ping,
+
+commande utilisée: ping 10.10.10.22
+
+résultat obtenu:
+
+Envoi d'une requête 'Ping'  10.10.10.22 avec 32 octets de données :
+
+Réponse de 10.10.10.22 : octets=32 temps=3 ms TTL=128
+
+Réponse de 10.10.10.22 : octets=32 temps=3 ms TTL=128
+
+Réponse de 10.10.10.22 : octets=32 temps=3 ms TTL=128
+
+Réponse de 10.10.10.22 : octets=32 temps=3 ms TTL=128
+
+Statistiques Ping pour 10.10.10.22:
+
+Paquets : envoyés = 4, reçus = 4, perdus = 0 (perte 0%),
+
+Durée approximative des boucles en millisecondes :
+
+Minimum = 3ms, Maximum = 3ms, Moyenne = 3ms
+
+La commande fonctionne correctement même avec le pare-feu
 En reconnectant le serveur la connexion fonctionne et l'échange de messages est possible dans les 2 sens.
   
 # III. Manipulations d'autres outils/protocoles côté client
@@ -227,7 +252,16 @@ Une fois que le serveur DHCP vous a donné une IP, vous enregistrer un fichier a
 🌞**Exploration du DHCP, depuis votre PC**
 
 - afficher l'adresse IP du serveur DHCP du réseau WiFi YNOV
+
+commande effectuée: ipconfig /all
+résulat obtenue pour l'adresse DHCP du réseau WiFi YNOV :
+Serveur DHCP . . . . . . . . . . . . . : 10.33.19.254
+
 - cette adresse a une durée de vie limitée. C'est le principe du ***bail DHCP*** (ou *DHCP lease*). Trouver la date d'expiration de votre bail DHCP
+
+Bail expirant. . . . . . . . . . . . . : vendredi 7 octobre 2022 08:46:16
+
+
 - vous pouvez vous renseigner un peu sur le fonctionnement de DHCP dans les grandes lignes. On aura un cours là dessus :)
 
 > Chez vous, c'est votre box qui fait serveur DHCP et qui vous donne une IP quand vous le demandez.
@@ -244,18 +278,76 @@ Si votre navigateur fonctionne "normalement" (il vous permet d'aller sur `google
 
 🌞** Trouver l'adresse IP du serveur DNS que connaît votre ordinateur**
 
+Serveurs DNS. . .  . . . . . . . . . . :
+8.8.8.8
+
+8.8.8.4
+
+1.1.1.1
+
 🌞 Utiliser, en ligne de commande l'outil `nslookup` (Windows, MacOS) ou `dig` (GNU/Linux, MacOS) pour faire des requêtes DNS à la main
 
 - faites un *lookup* (*lookup* = "dis moi à quelle IP se trouve tel nom de domaine")
   - pour `google.com`
+
+  commande utilisée: nslookup google.com
+Serveur :   dns.google
+Address:  8.8.8.8
+Réponse ne faisant pas autorité :
+Nom :    google.com
+Addresses:  2a00:1450:4007:80f::200e
+142.250.179.110
+
   - pour `ynov.com`
+
+  commande utilisée: nslookup ynov.com
+
+Serveur :   dns.google
+Address:  8.8.8.8
+
+Réponse ne faisant pas autorité :
+Nom :    ynov.com
+Addresses:  2606:4700:20::ac43:4ae2
+2606:4700:20::681a:be9
+2606:4700:20::681a:ae9
+104.26.10.233
+172.67.74.226
+104.26.11.233
   - interpréter les résultats de ces commandes
+
+  Ces commandes nous montre les différentes adresses IP des différents serveurs liées au nom de domaine recherché, via a une demande au serveur dns.google et une réponse envoyer par ce dernier.
+Donc ici on peut voir que Ynov possède différents serveur
 - déterminer l'adresse IP du serveur à qui vous venez d'effectuer ces requêtes
+
+Serveur :   dns.google
+Address:  8.8.8.8
+
+
 - faites un *reverse lookup* (= "dis moi si tu connais un nom de domaine pour telle IP")
+
+
   - pour l'adresse `78.73.21.21`
+
+commande utilisée: nslookup 231.34.113.12
+
+Serveur :   dns.google
+Address:  8.8.8.8
+*** dns.google ne parvient pas à trouver 231.34.113.12 : Non-existent domain
+
   - pour l'adresse `22.146.54.58`
+
+  commande utilisée: nslookup 78.34.2.17
+
+Serveur :   dns.google
+Address:  8.8.8.8
+Nom :    cable-78-34-2-17.nc.de
+Address:  78.34.2.17
   - interpréter les résultats
   - *si vous vous demandez, j'ai pris des adresses random :)*
+
+  On demande ici au serveur DNS de google si l'adresse que l'on recherche est liée à un nom de domaine et donc si il existe.
+
+
 
 # IV. Wireshark
 
@@ -279,7 +371,13 @@ Un peu austère aux premiers abords, une manipulation très basique permet d'avo
 🌞 Utilisez le pour observer les trames qui circulent entre vos deux carte Ethernet. Mettez en évidence :
 
 - un `ping` entre vous et votre passerelle
+
+<img src="Image/a.png"/>
+
 - un `netcat` entre vous et votre mate, branché en RJ45
+
+<img src="Image/e.png"/>
+
 - une requête DNS. Identifiez dans la capture le serveur DNS à qui vous posez la question.
 - prenez moi des screens des trames en question
 - on va prendre l'habitude d'utiliser Wireshark souvent dans les cours, pour visualiser ce qu'il se passe
