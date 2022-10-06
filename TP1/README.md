@@ -190,6 +190,18 @@ netstat -a -n -b
 - il est possible d'indiquer à `netcat` une interface précise sur laquelle écouter
   - par exemple, on écoute sur l'interface Ethernet, mais pas sur la WiFI
 
+Commande : .\nc64.exe -l -p 8888
+
+ Commande : netstat -a -n -b | Select-String 8888
+
+ TCP    0.0.0.0:8888           0.0.0.0:0              LISTENING
+
+ Commande : .\nc64.exe -l -p 8888 -s 10.10.10.22
+
+ Commande : netstat -a -n -b | Select-String 8888
+
+ TCP    10.10.10.22:8888       0.0.0.0:0              LISTENING
+
 ```bash
 # Sur Windows/MacOS
 $ nc.exe -l -p PORT_NUMBER -s IP_ADDRESS
@@ -215,6 +227,8 @@ Le but est de configurer votre firewall plutôt que de le désactiver
   - choisissez arbitrairement un port entre 1024 et 20000
   - vous utiliserez ce port pour communiquer avec `netcat` par groupe de 2 toujours
   - le firewall du *PC serveur* devra avoir un firewall activé et un `netcat` qui fonctionne
+
+En reconnectant le serveur la connexion fonctionne et l'échange de messages est possible dans les 2 sens.
   
 # III. Manipulations d'autres outils/protocoles côté client
 
@@ -236,6 +250,8 @@ Une fois que le serveur DHCP vous a donné une IP, vous enregistrer un fichier a
 - vous pouvez vous renseigner un peu sur le fonctionnement de DHCP dans les grandes lignes. On aura un cours là dessus :)
 
 > Chez vous, c'est votre box qui fait serveur DHCP et qui vous donne une IP quand vous le demandez.
+
+
 
 ## 2. DNS
 
