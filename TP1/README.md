@@ -372,7 +372,7 @@ Un peu austère aux premiers abords, une manipulation très basique permet d'avo
 
 - un `ping` entre vous et votre passerelle
 
-<img src="Image/a.png"/>
+<img src="Image/image 0.png"/>
 
 - un `netcat` entre vous et votre mate, branché en RJ45
 
