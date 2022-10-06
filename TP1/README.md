@@ -1,22 +1,3 @@
-            *  Passerelle par défaut: 10.33.19.254
-        
-        * 🌞 Déterminer la MAC de la passerelle
-            * arp -a : passerelle par défaut :10.33.19.254  / Mac de la passerelle: 00-c0-e7-e0-04-4e
-        * 🌞 Trouvez comment afficher les informations sur une carte IP (change selon l'OS)
-            * Adresse IPv4 : 10.33.16.103 , Adresse physique: F8-B5-4D-6C-58-0E , gateway : 10.33.19.254
-    * 2 Modifications des informations
-        * 🌞 Utilisez l'interface graphique de votre OS pour changer d'adresse IP :
-            * C:\Users\alexy>ipv4 set address name= 10.33.16.103
-        'ipv4' n’est pas reconnu en tant que commande interne
-        ou externe, un programme exécutable ou un fichier de commandes.
-        impossible de faire une commande avec IPV4: netsh interface puis
-        ipv4 set address name="NOM DE L'INTERFACE" puis
-        static IP_SOUHAITEE MASQUE_DE_SOUS_RESEAU PASSERELLE
-
-        * 🌞 Il est possible que vous perdiez l'accès internet:
-            * j'imagine que c'est parce qu'on change notre adresse IP donc on doit se reconnecter avec notre nouvelle adresse IP.
-* II. Exploration locale en duo
-    * 3. Modification d'adresse IP
 
 # TP1 - Premier pas réseau
 
