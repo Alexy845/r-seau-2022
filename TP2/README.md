@@ -23,7 +23,8 @@ Masque 255.255.252.0
 - commande utilisée :
 ping 10.10.42.12
 
-- résultats : <br>
+- résultats : 
+<br>
 Envoi d’une requête 'Ping'  10.10.42.12 avec 32 octets de données :<br>
 Réponse de 10.10.42.12 : octets=32 temps=1 ms TTL=128<br>
 Réponse de 10.10.42.12 : octets=32 temps=2 ms TTL=128<br>
@@ -42,3 +43,18 @@ Durée approximative des boucles en millisecondes :<br>
 - résultats :
 
     [Wireshark ping PC2](./ICMP.pcapng)
+
+    type envoyé : 8
+
+    type reçu : 0 
+
+# II. ARP my bro
+
+🌞 Check the ARP table
+- commande utilisée : arp -a 
+
+- résulats  : <br>
+MAC mate a8-5e-45-37-f4-45 <br> 
+MAC gateway 00-c0-e7-e0-04-4e
+
+🌞 Manipuler la table ARP
