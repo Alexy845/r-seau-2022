@@ -116,3 +116,26 @@ MAC gateway 00-c0-e7-e0-04-4e
 🌞 Wireshark it
 
 - [Wireshark ARP](./ARP.pcapng)
+
+- ARP Request , source : Address: Micro-St_b6:05:39 , Destination : ASUSTekC_37:f4:4 <br>
+ARP Reply ,  source : Address: ASUSTekC_37:f4:4  , Destination : Micro-St_b6:05:39
+
+- ARP	42	Who has 10.10.42.12? Tell 10.10.42.18 mon pc demande qui est 10.10.42.12 / ARP	60	10.10.42.12 is at a8:5e:45:37:f4:45 le pc de mon mate renvoie qui sa MAC 
+
+# III. DHCP you too my brooo
+
+🌞 Wireshark it
+
+- [Wireshark DHCP](./DHCP.pcapng)
+
+source :	0.0.0.0	 destination : 255.255.255.255 Discover 
+
+source :	10.33.19.254	 destination : 10.33.16.244	Offer 
+
+source :	0.0.0.0	 destination : 255.255.255.255 Request 
+
+source :	10.33.19.254	destination : 10.33.16.244	ACK 
+
+- 1 : la tram Offer me donne l'adresse IP 10.33.16.244 <br>
+2 : adresse Ip de la passerelle réseau 10.33.19.254 <br>
+3 : l'adresse d'un serveur DNS , ex : 8.8.8.8
