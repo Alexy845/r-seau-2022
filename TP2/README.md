@@ -58,3 +58,61 @@ MAC mate a8-5e-45-37-f4-45 <br>
 MAC gateway 00-c0-e7-e0-04-4e
 
 🌞 Manipuler la table ARP
+- arp -d
+
+- avant :
+
+
+    Interface : 192.168.30.1 --- 0x10
+
+  Adresse Internet      /   Adresse physique /   Type
+
+  192.168.30.255     /   ff-ff-ff-ff-ff-ff   /  statique <br>
+  224.0.0.22         /   01-00-5e-00-00-16   /  statique <br>
+  224.0.0.251         /  01-00-5e-00-00-fb    / statique<br>
+  239.255.255.250      / 01-00-5e-7f-ff-fa     /statique<br>
+
+    Interface : 10.33.16.244 --- 0x12
+
+    Adresse Internet  /    Adresse physique /     Type
+
+    10.33.19.254       /   00-c0-e7-e0-04-4e /    dynamique<br>
+  10.33.19.255        /  ff-ff-ff-ff-ff-ff  /   statique<br>
+  224.0.0.22        /    01-00-5e-00-00-16   /  statique<br>
+  224.0.0.251        /   01-00-5e-00-00-fb    / statique<br>
+  239.255.255.250     /  01-00-5e-7f-ff-fa     /statique<br>
+
+    Interface : 192.168.136.1 --- 0x14
+
+  Adresse Internet  /    Adresse physique  /    Type 
+
+  192.168.136.255    /   ff-ff-ff-ff-ff-ff  /   statique<br>
+  224.0.0.22       /     01-00-5e-00-00-16   /  statique<br>
+  224.0.0.251       /    01-00-5e-00-00-fb    / statique<br>
+  239.255.255.250    /   01-00-5e-7f-ff-fa     /statique<br>
+
+- après :
+
+    Interface : 192.168.30.1 --- 0x10
+    
+  Adresse Internet   /   Adresse physique  /    Type<br>
+  224.0.0.22          /  01-00-5e-00-00-16  /   statique
+
+    Interface : 10.33.16.244 --- 0x12
+
+  Adresse Internet     / Adresse physique    /  Type
+
+  10.33.19.254          /00-c0-e7-e0-04-4e    / dynamique<br>
+  224.0.0.22         /   01-00-5e-00-00-16     /statique<br>
+
+    Interface : 192.168.136.1 --- 0x14
+
+  Adresse Internet    /  Adresse physique    /  Type
+
+  224.0.0.22           / 01-00-5e-00-00-16    / statique
+
+- le mate réapparé dans la table ARP
+
+🌞 Wireshark it
+
+- [Wireshark ARP](./ARP.pcapng)
