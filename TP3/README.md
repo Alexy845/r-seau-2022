@@ -40,3 +40,7 @@
     - sudo ip neigh flush all et ping 10.3.2.12 et ping 10.3.2.12
     
     les packets sont bien transmits 
+
+🦈 Capture réseau tp3_arp.pcapng qui contient un ARP request et un ARP reply
+
+- [Wireshark tp3_arp](./tp3_arp.pcapng.pcap)
