@@ -96,3 +96,21 @@
 # 3. Accès internet
 
 🌞Donnez un accès internet à vos machines
+
+- sudo nano /etc/sysconfig/network
+
+    GATEWAY= adresse IP de john ou marcel mais on a que le dernier qu'on change x.x.x.254 ex 10.3.2.254 et on redemarre avec 
+    
+    sudo systemctl restart NetworkManager
+    
+    ping 8.8.8.8 ça fonctionne on a bien réussi a ping google
+- sudo cat /etc/resolv.conf
+
+    ex donné :
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+nameserver 1.1.1.1
+
+    et quand on fait dig gitlab.com par ex on nous donne les info de gitlab et perso quand j'ai ping gitlab ou google ou 1.1.1.1 pour testé ça a direct fonctionné 
+
+🌞 Analyse de trames
