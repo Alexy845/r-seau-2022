@@ -90,3 +90,9 @@
 | 2     | Réponse ARP | 10.3.1.254         | Marcel  `08:00:27:4b:d9:68`                     | 10.3.1.11              | `John` `08:00:27:8e:02:d1`    |              |                            |
 | 3     | Ping        | 10.3.1.11         | John     `08:00:27:8e:02:d1`                    | 10.3.2.12           | Marcel       `08:00:27:4b:d9:68`                     |
 | 4     | Pong        |     10.3.2.12    | Marcel  `08:00:27:4b:d9:68`                        | 10.3.1.11             | John     `08:00:27:8e:02:d1`                     |
+
+- [Wireshark tp3_routage_marcel.pcapng](./ping_marcel_vers_john.pcapng) on  retrouve bien les données ICMP
+
+# 3. Accès internet
+
+🌞Donnez un accès internet à vos machines
