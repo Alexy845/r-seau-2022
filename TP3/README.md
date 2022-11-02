@@ -132,3 +132,11 @@ nameserver 1.1.1.1
 | 2     | pong       | google `8.8.8.8`               | google `08:00:27:f5:ef:4b`                    | `marcel` `10.3.1.12`        | `marcel` `08:00:27:fa:05:2e`    
 
 [tp3_routage_internet.pcapng](./tp3_routage_internet.pcapng)
+
+## 1. Mise en place du serveur DHCP
+
+🌞 Sur la machine john, vous installez et configurez un serveur DHCP (allez Google "rocky linux dhcp server").
+
+- installation du serveur sur john
+
+    sudo dnf install dhcp-server -y
