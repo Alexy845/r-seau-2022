@@ -114,3 +114,21 @@ nameserver 1.1.1.1
     et quand on fait dig gitlab.com par ex on nous donne les info de gitlab et perso quand j'ai ping gitlab ou google ou 1.1.1.1 pour testé ça a direct fonctionné 
 
 🌞 Analyse de trames
+
+
+- effectuer un ping 8.8.8.8 depuis john
+
+    --- 8.8.8.8 ping statistics ---
+    3 packets transmitted, 3 received, 0% packet loss, time 2016ms
+    rtt min/avg/max/mdev = 62.422/125.435/220.156/68.186 ms
+
+- capturez le ping depuis john avec tcpdump 
+
+    sudo tcpdump -i enp0s8 -w john_sur_google.pcap
+
+| ordre | type trame | IP source          | MAC source              | IP destination | MAC destination |     |
+|-------|------------|--------------------|-------------------------|----------------|-----------------|-----|
+| 1     | ping       | `marcel` `10.3.1.12` | `marcel` `08:00:27:fa:05:2e` | `8.8.8.8`      | google `08:00:27:f5:ef:4b`               |     |
+| 2     | pong       | google `8.8.8.8`               | google `08:00:27:f5:ef:4b`                    | `marcel` `10.3.1.12`        | `marcel` `08:00:27:fa:05:2e`    
+
+[tp3_routage_internet.pcapng](./tp3_routage_internet.pcapng)
