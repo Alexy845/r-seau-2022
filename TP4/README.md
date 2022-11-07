@@ -57,4 +57,13 @@
 
          [wireshark Epic games](./Epic%20game.pcapng)
 
+         
+
+
+# II. Mise en place
+
+## 1. SSH
+🖥️ Machine node1.tp4.b1
+
+🌞 Examinez le trafic dans Wireshark
 
