@@ -180,6 +180,8 @@ node1      IN A 10.4.1.11
 ```
 
 ```powershell
+sudo cat /var/named/tp4.b1.rev
+
 $TTL 86400
 @ IN SOA dns-server.tp4.b1. admin.tp4.b1. (
     2019061800 ;Serial
@@ -223,6 +225,8 @@ lines 1-20/20 (END)
 ```
 
 ```powershell
+sudo ss
+
 tcp     LISTEN   0        10            10.4.1.201:53            0.0.0.0:*      users:(("named",pid=42357,fd=32))
 tcp     LISTEN   0        10            10.4.1.201:53            0.0.0.0:*      users:(("named",pid=42357,fd=33))
 tcp     LISTEN   0        10             127.0.0.1:53            0.0.0.0:*      users:(("named",pid=42357,fd=26))
@@ -234,3 +238,115 @@ tcp     LISTEN   0        4096               [::1]:953              [::]:*      
 ```
 
 🌞 Ouvrez le bon port dans le firewall
+```powershell
+sudo firewall-cmd --add-port=53/tcp --permanent
+[sudo] password for alexy:
+success
+```
+```powershell
+sudo firewall-cmd --list-all
+
+[sudo] password for alexy:
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s8
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports:
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+  ```
+
+## 3. Test
+
+🌞 Sur la machine node1.tp4.b1
+
+```powershell
+sudo firewall-cmd --add-port=53/udp --permanent
+success
+[alexy@dns-server ~]$ sudo firewall-cmd --reload
+success
+```
+
+```powershell
+dig node1.tp4.b1
+
+; <<>> DiG 9.16.23-RH <<>> node1.tp4.b1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 27649
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;node1.tp4.b1.                  IN      A
+
+;; AUTHORITY SECTION:
+.                       86400   IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022111001 1800 900 604800 86400
+
+;; Query time: 27 msec
+;; SERVER: 1.1.1.1#53(1.1.1.1)
+;; WHEN: Thu Nov 10 12:04:04 CET 2022
+;; MSG SIZE  rcvd: 116
+
+[alexy@node1 ~]$ dig dns-server.tp4.b1
+
+; <<>> DiG 9.16.23-RH <<>> dns-server.tp4.b1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 190
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;dns-server.tp4.b1.             IN      A
+
+;; AUTHORITY SECTION:
+.                       86400   IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022111001 1800 900 604800 86400
+
+;; Query time: 27 msec
+;; SERVER: 1.1.1.1#53(1.1.1.1)
+;; WHEN: Thu Nov 10 12:04:10 CET 2022
+;; MSG SIZE  rcvd: 121
+
+[alexy@node1 ~]$ dig www.google.com
+
+; <<>> DiG 9.16.23-RH <<>> www.google.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 43207
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;www.google.com.                        IN      A
+
+;; ANSWER SECTION:
+www.google.com.         259     IN      A       142.250.201.164
+
+;; Query time: 23 msec
+;; SERVER: 1.1.1.1#53(1.1.1.1)
+;; WHEN: Thu Nov 10 12:04:20 CET 2022
+;; MSG SIZE  rcvd: 59
+```
+
+🌞 Sur votre PC
+
+```powershell
+C:\WINDOWS\system32> nslookup node1.tp4.b1 10.4.1.201
+Serveur :   dns-server.tp4.b1
+Address:  10.4.1.201
+
+Nom :    node1.tp4.b1
+Address:  10.4.1.11
+```
+[Wireshark DNS](./DNS.pcapng)
